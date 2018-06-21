@@ -51,20 +51,54 @@
 			</v-toolbar>
 			<v-content>
 				<v-container>
-					<vue-drag-item
-						:revert-duration="1000"
+					<vue-flex-box
+						direction-column
+						:spacing="16"
 					>
-						<v-avatar
-							slot-scope="props"
-							style="cursor: pointer;"
-							color="deep-purple"
-						>
-							<v-icon dark>cake</v-icon>
-						</v-avatar>
-					</vue-drag-item>
+						<vue-flex-item>
+							<div
+								class="deep-purple"
+								style="
+									border-width: 1px;
+									border-style: dashed;
+									border-radius: 8px;
+									background-color: transparent !important;
+									padding: 8px;
+								"
+							>
+								<my-example-i0></my-example-i0>
+							</div>
+						</vue-flex-item>
+					</vue-flex-box>
 				</v-container>
 			</v-content>
 		</v-app>
+		<template id="app-example-i0">
+			<div>
+				<vue-drag-item
+					:revert-duration="1000"
+				>
+					<v-avatar
+						slot-scope="props"
+						style="cursor: pointer;"
+						color="deep-purple"
+					>
+						<span style="font-size: 2em;">🍌</span>
+					</v-avatar>
+				</vue-drag-item>
+				<vue-drag-item
+					:revert-duration="1000"
+				>
+					<v-avatar
+						slot-scope="props"
+						style="cursor: pointer;"
+						color="deep-purple"
+					>
+						<span style="font-size: 2em;">🍎</span>
+					</v-avatar>
+				</vue-drag-item>
+			</div>
+		</template>
 		<script src="demo/index.js"></script>
 	</body>
 </html>
