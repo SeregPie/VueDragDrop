@@ -67,6 +67,7 @@ If Vue is detected, the components will be registered automatically.
 | property | type | default |
 | ---: | :--- | :--- |
 | `tag` | `String` | `'div'` |
+| `revertDuration` | `Number` | `0` |
 | `restrict` | | |
 | `data` | | |
 
