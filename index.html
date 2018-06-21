@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		/>
+		<title>VueDragDrop</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+		<script src="VueDragDrop.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.css"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.js"></script>
+	</head>
+	<body>
+		<v-app
+			v-cloak
+			id="app"
+		>
+			<v-toolbar
+				color="deep-purple darken-3"
+				dark
+				app
+			>
+				<v-toolbar-title>VueDragDrop</v-toolbar-title>
+				<v-spacer></v-spacer>
+				<v-btn
+					href="https://github.com/SeregPie/VueDragDrop"
+					target="_blank"
+					icon
+				>
+					<v-icon>fab fa-github</v-icon>
+				</v-btn>
+			</v-toolbar>
+			<v-content>
+				<v-container>
+					<vue-drag-item
+						:revert-duration="1000"
+					>
+						<v-avatar
+							slot-scope="props"
+							style="cursor: pointer;"
+							color="deep-purple"
+						>
+							<v-icon dark>cake</v-icon>
+						</v-avatar>
+					</vue-drag-item>
+				</v-container>
+			</v-content>
+		</v-app>
+		<script src="demo/index.js"></script>
+	</body>
+</html>
