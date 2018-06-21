@@ -74,9 +74,10 @@
 			</v-content>
 		</v-app>
 		<template id="app-example-i0">
-			<div>
+			<div style="height: 300px;">
 				<vue-drag-item
 					:revert-duration="1000"
+					:restrict="this"
 				>
 					<v-avatar
 						slot-scope="props"
@@ -88,6 +89,7 @@
 				</vue-drag-item>
 				<vue-drag-item
 					:revert-duration="1000"
+					:restrict="this"
 				>
 					<v-avatar
 						slot-scope="props"

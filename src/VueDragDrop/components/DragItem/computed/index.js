@@ -1,11 +1,9 @@
-import relativeCurrentPosition from './relativeCurrentPosition';
-import relativePosition from './relativePosition';
-import relativeStartPosition from './relativeStartPosition';
+import restrictedPosition from './restrictedPosition';
+import translatedPosition from './translatedPosition';
 import windowEventListeners from './windowEventListeners';
 
 export default {
-	relativeCurrentPosition,
-	relativePosition,
-	relativeStartPosition,
+	restrictedPosition,
+	translatedPosition,
 	windowEventListeners,
 };

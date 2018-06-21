@@ -5,7 +5,7 @@ export default function (createElement) {
 	let {
 		$scopedSlots,
 		dragged,
-		relativePosition,
+		translatedPosition,
 		revertDuration,
 		tag,
 	} = this;
@@ -15,25 +15,26 @@ export default function (createElement) {
 		...$scopedSlots,
 	};
 
-	let slotElement = $scopedSlots.default({dragged});
-	let wrapElementStyle = {
+	let defaultSlotElement = $scopedSlots.default({dragged});
+	let ghostElementStyle = {
 		position: 'relative',
 	};
 	if (dragged) {
-		wrapElementStyle.transform = `translate(${relativePosition.map(x => `${x}px`).join(',')})`;
+		ghostElementStyle.transform = `translate(${translatedPosition.map(v => `${v}px`).join(',')})`;
 	} else
 	if (revertDuration > 0) {
-		wrapElementStyle.transition = [
+		ghostElementStyle.transition = [
 			'transform',
 			`${revertDuration}ms`
 		];
 	}
-	let wrapElement = createElement(
+	let ghostElement = createElement(
 		tag,
 		{
-			style: wrapElementStyle,
+			style: ghostElementStyle,
+			ref: 'ghost',
 		},
-		[slotElement],
+		[defaultSlotElement],
 	);
 	let mainElement = createElement(
 		tag,
@@ -48,7 +49,7 @@ export default function (createElement) {
 				mousedown: this.onMouseDown,
 			}, f => f.bind(this)),
 		},
-		[wrapElement],
+		[ghostElement],
 	);
 	return mainElement;
 }

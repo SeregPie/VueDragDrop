@@ -14,31 +14,31 @@ export default {
 						onTouchMove(event) {
 							if (event.touches.length === 1) {
 								event.preventDefault();
-								let currentPosition = [
+								let position = [
 									event.touches[0].clientX,
 									event.touches[0].clientY,
 								];
 								this.triggerDragStart(startPosition);
-								this.triggerDrag(currentPosition);
+								this.triggerDrag(position);
 								next({
 									onTouchMove(event) {
 										if (event.touches.length === 1) {
 											event.preventDefault();
-											currentPosition = [
+											position = [
 												event.touches[0].clientX,
 												event.touches[0].clientY,
 											];
-											this.triggerDrag(currentPosition);
+											this.triggerDrag(position);
 										}
 									},
 									onTouchEnd(event) {
 										if (event.changedTouches.length === 1) {
 											event.preventDefault();
-											currentPosition = [
+											position = [
 												event.changedTouches[0].clientX,
 												event.changedTouches[0].clientY,
 											];
-											this.triggerDragEnd(currentPosition);
+											this.triggerDragEnd(position);
 											next();
 										}
 									},
@@ -64,29 +64,29 @@ export default {
 					next({
 						onMouseMove(event) {
 							event.preventDefault();
-							let currentPosition = [
+							let position = [
 								event.clientX,
 								event.clientY,
 							];
 							this.triggerDragStart(startPosition);
-							this.triggerDrag(currentPosition);
+							this.triggerDrag(position);
 							next({
 								onMouseMove(event) {
 									event.preventDefault();
-									currentPosition = [
+									position = [
 										event.clientX,
 										event.clientY,
 									];
-									this.triggerDrag(currentPosition);
+									this.triggerDrag(position);
 								},
 								onMouseUp(event) {
 									if (event.which === 1) {
 										event.preventDefault();
-										currentPosition = [
+										position = [
 											event.clientX,
 											event.clientY,
 										];
-										this.triggerDragEnd(currentPosition);
+										this.triggerDragEnd(position);
 										next();
 									}
 								},
