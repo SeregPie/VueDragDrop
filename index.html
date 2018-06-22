@@ -2,100 +2,63 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 		<title>VueDragDrop</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-		<style>
-			[v-cloak] {
-				display: none;
-			}
-		</style>
+		<style>[v-cloak] {display: none;}</style>
 		<script src="VueDragDrop.js"></script>
-		<link
-			rel="stylesheet"
-			href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.css"
-		/>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.css"/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.js"></script>
+		<script src="https://unpkg.com/@seregpie/vueflex@18.5.11"></script>
 	</head>
 	<body>
-		<v-app
-			v-cloak
-			id="app"
-		>
-			<v-toolbar
-				color="deep-purple darken-3"
-				dark
-				app
-			>
+		<v-app v-cloak id="app">
+			<v-toolbar dark app>
 				<v-toolbar-title>VueDragDrop</v-toolbar-title>
 				<v-spacer></v-spacer>
-				<v-btn
-					href="https://github.com/SeregPie/VueDragDrop"
-					target="_blank"
-					icon
-				>
+				<v-btn href="https://github.com/SeregPie/VueDragDrop" target="_blank" icon>
 					<v-icon>fab fa-github</v-icon>
 				</v-btn>
 			</v-toolbar>
 			<v-content>
 				<v-container>
-					<vue-flex-box
-						direction-column
-						:spacing="16"
-					>
-						<vue-flex-item>
-							<div
-								class="deep-purple"
-								style="
-									border-width: 1px;
-									border-style: dashed;
-									border-radius: 8px;
-									background-color: transparent !important;
-									padding: 8px;
-								"
-							>
-								<my-example-i0></my-example-i0>
+					<vue-flex-box direction-column :spacing="32">
+						<vue-flex-item v-for="i in 2">
+							<div style="font-size: 1.5em;">#{{ i }}</div>
+							<div style="border: 1px dashed #9e9e9e; border-radius: 8px; padding: 8px;">
+								<component :is="'my-example-i'+i"></component>
 							</div>
 						</vue-flex-item>
 					</vue-flex-box>
 				</v-container>
 			</v-content>
 		</v-app>
-		<template id="app-example-i0">
+		<template id="app-example-i1">
+			<div style="height: 200px; padding: 24px;">
+				<div style="position: relative; width: 100%; height: 100%;" ref="dragArea">
+					<div style="position: absolute; width: 0; height: 0;" :style="{left: (position[0] * 100)+'%', top: (position[1] * 100)+'%'}">
+						<vue-drag-item style="transform: translate(-50%,-50%);" @drag="onDrag">
+							<v-avatar slot-scope="props" style="cursor: pointer;" :size="48" :color="[props.dragged ? 'red' : 'blue', 'lighten-3'].join(' ')">
+								<span style="font-size: 2em;">{{ props.dragged ? '😠' : '🙂' }}</span>
+							</v-avatar>
+							<div slot="ghost"></div>
+						</vue-drag-item>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template id="app-example-i2">
 			<div style="height: 300px;">
-				<vue-drag-item
-					:revert-duration="1000"
-					:restrict="this"
-				>
-					<v-avatar
-						slot-scope="props"
-						style="cursor: pointer;"
-						color="deep-purple"
-					>
+				<vue-drag-item :revert-duration="1000" :restrict="this">
+					<v-avatar slot-scope="props" style="cursor: pointer;" color="pink">
 						<span style="font-size: 2em;">🍌</span>
 					</v-avatar>
 				</vue-drag-item>
-				<vue-drag-item
-					:revert-duration="1000"
-					:restrict="this"
-				>
-					<v-avatar
-						slot-scope="props"
-						style="cursor: pointer;"
-						color="deep-purple"
-					>
+				<vue-drag-item :revert-duration="1000" :restrict="this">
+					<v-avatar slot-scope="props" style="cursor: pointer;" color="pink">
 						<span style="font-size: 2em;">🍎</span>
 					</v-avatar>
 				</vue-drag-item>
