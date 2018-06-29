@@ -302,6 +302,15 @@
 		}, 1000);
 	}
 
+	function beforeDestroy() {
+		Object.entries(this.windowEventListeners).forEach(function (ref) {
+			var eventName = ref[0];
+			var eventListener = ref[1];
+
+			window.removeEventListener(eventName, eventListener);
+		});
+	}
+
 	function Object_isObject(value) {
 		return (value && typeof value === 'object');
 	}
@@ -493,6 +502,7 @@
 		computed: computed,
 		//watch,
 		mounted: mounted,
+		beforeDestroy: beforeDestroy,
 		methods: methods,
 		render: render,
 	};

@@ -6,6 +6,7 @@ import strategy from './strategy';
 import computed from './computed';
 //import watch from './watch';
 import mounted from './mounted';
+import beforeDestroy from './beforeDestroy';
 import methods from './methods';
 import render from './render';
 
@@ -19,6 +20,7 @@ export default {
 	computed,
 	//watch,
 	mounted,
+	beforeDestroy,
 	methods,
 	render,
 };
