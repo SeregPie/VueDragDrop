@@ -1,9 +1,9 @@
-import restrictedPosition from './restrictedPosition';
-import translatedPosition from './translatedPosition';
+import position from './position';
+import relativePosition from './relativePosition';
 import windowEventListeners from './windowEventListeners';
 
 export default {
-	restrictedPosition,
-	translatedPosition,
+	position,
+	relativePosition,
 	windowEventListeners,
 };

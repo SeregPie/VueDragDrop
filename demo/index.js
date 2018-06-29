@@ -14,11 +14,11 @@
 				},
 
 				methods: {
-					onDrag: function(point) {
+					onDrag: function(event) {
 						var bounds = this.$refs.dragArea.getBoundingClientRect();
 						this.position = [
-							Math.min(Math.max((point[0] - bounds.left) / bounds.width, 0), 1),
-							Math.min(Math.max((point[1] - bounds.top) / bounds.height, 0), 1),
+							Math.min(Math.max((event.position.left - bounds.left) / bounds.width, 0), 1),
+							Math.min(Math.max((event.position.top - bounds.top) / bounds.height, 0), 1),
 						];
 					},
 				},

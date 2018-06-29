@@ -5,7 +5,7 @@ export default function (createElement) {
 	let {
 		$scopedSlots,
 		dragged,
-		translatedPosition,
+		relativePosition,
 		revertDuration,
 		tag,
 	} = this;
@@ -19,15 +19,15 @@ export default function (createElement) {
 	let ghostElementStyle = {
 		position: 'relative',
 	};
-	if (dragged) {
-		ghostElementStyle.transform = `translate(${translatedPosition.map(v => `${v}px`).join(',')})`;
+	/*if (dragged) {
+		ghostElementStyle.transform = `translate(${relativePosition.left}px,${relativePosition.top}px)`;
 	} else
 	if (revertDuration > 0) {
 		ghostElementStyle.transition = [
 			'transform',
 			`${revertDuration}ms`
 		];
-	}
+	}*/
 	let ghostElement = createElement(
 		tag,
 		{

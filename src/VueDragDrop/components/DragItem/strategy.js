@@ -6,39 +6,41 @@ export default {
 			onTouchStart(event) {
 				if (event.touches.length === 1) {
 					event.preventDefault();
-					let startPosition = [
+					/*let pointerPosition = [
 						event.touches[0].clientX,
 						event.touches[0].clientY,
-					];
+					];*/
 					next({
 						onTouchMove(event) {
 							if (event.touches.length === 1) {
 								event.preventDefault();
-								let position = [
-									event.touches[0].clientX,
-									event.touches[0].clientY,
-								];
-								this.triggerDragStart(startPosition);
-								this.triggerDrag(position);
+								this.dragged = true;
+								this.pointerPosition = {
+									left: event.touches[0].clientX,
+									top: event.touches[0].clientY,
+								};
+								this.emitDragStart();
+								this.emitDrag();
 								next({
 									onTouchMove(event) {
 										if (event.touches.length === 1) {
 											event.preventDefault();
-											position = [
-												event.touches[0].clientX,
-												event.touches[0].clientY,
-											];
-											this.triggerDrag(position);
+											this.pointerPosition = {
+												left: event.touches[0].clientX,
+												top: event.touches[0].clientY,
+											};
+											this.emitDrag();
 										}
 									},
 									onTouchEnd(event) {
 										if (event.changedTouches.length === 1) {
 											event.preventDefault();
-											position = [
-												event.changedTouches[0].clientX,
-												event.changedTouches[0].clientY,
-											];
-											this.triggerDragEnd(position);
+											this.pointerPosition = {
+												left: event.changedTouches[0].clientX,
+												top: event.changedTouches[0].clientY,
+											};
+											this.dragged = false;
+											this.emitDragEnd();
 											next();
 										}
 									},
@@ -57,36 +59,38 @@ export default {
 			onMouseDown(event) {
 				if (event.which === 1) {
 					event.preventDefault();
-					let startPosition = [
+					/*let pointerPosition = [
 						event.clientX,
 						event.clientY,
-					];
+					];*/
 					next({
 						onMouseMove(event) {
 							event.preventDefault();
-							let position = [
-								event.clientX,
-								event.clientY,
-							];
-							this.triggerDragStart(startPosition);
-							this.triggerDrag(position);
+							this.dragged = true;
+							this.pointerPosition = {
+								left: event.clientX,
+								top: event.clientY,
+							};
+							this.emitDragStart();
+							this.emitDrag();
 							next({
 								onMouseMove(event) {
 									event.preventDefault();
-									position = [
-										event.clientX,
-										event.clientY,
-									];
-									this.triggerDrag(position);
+									this.pointerPosition = {
+										left: event.clientX,
+										top: event.clientY,
+									};
+									this.emitDrag();
 								},
 								onMouseUp(event) {
 									if (event.which === 1) {
 										event.preventDefault();
-										position = [
-											event.clientX,
-											event.clientY,
-										];
-										this.triggerDragEnd(position);
+										this.pointerPosition = {
+											left: event.clientX,
+											top: event.clientY,
+										};
+										this.dragged = false;
+										this.emitDragEnd();
 										next();
 									}
 								},

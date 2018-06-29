@@ -1,3 +1,3 @@
 export default function(value) {
-	return (value === undefined);
+	return (value && value._isVue);
 }

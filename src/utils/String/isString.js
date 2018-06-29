@@ -1,3 +1,3 @@
 export default function(value) {
-	return typeof value === 'string';
+	return (typeof value === 'string');
 }

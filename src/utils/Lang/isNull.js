@@ -1,3 +1,3 @@
 export default function(value) {
-	return value === null;
+	return (value === null);
 }
