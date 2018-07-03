@@ -1,3 +1,3 @@
 export default function(value) {
-	return (value && value._isVue);
+	return value && value._isVue;
 }

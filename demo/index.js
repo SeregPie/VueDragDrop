@@ -9,16 +9,31 @@
 
 				data: function() {
 					return {
-						position: [1/2, 1/2],
+						items: [
+							{
+								position: [Math.random(), Math.random()],
+							},
+							{
+								position: [Math.random(), Math.random()],
+							},
+							{
+								position: [Math.random(), Math.random()],
+							},
+						],
+						itemSize: 48,
 					};
 				},
 
 				methods: {
 					onDrag: function(event) {
-						var bounds = this.$refs.dragArea.getBoundingClientRect();
-						this.position = [
-							Math.min(Math.max((event.position.left - bounds.left) / bounds.width, 0), 1),
-							Math.min(Math.max((event.position.top - bounds.top) / bounds.height, 0), 1),
+						var items = this.items;
+						var $refs = this.$refs;
+						var dragAreaBounds = $refs.dragArea.getBoundingClientRect();
+						var itemIndex = event.data;
+						var item = items[itemIndex];
+						item.position = [
+							Math.min(Math.max((event.position.left - dragAreaBounds.left) / dragAreaBounds.width, 0), 1),
+							Math.min(Math.max((event.position.top - dragAreaBounds.top) / dragAreaBounds.height, 0), 1),
 						];
 					},
 				},

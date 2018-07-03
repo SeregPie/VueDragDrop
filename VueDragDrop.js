@@ -11,7 +11,7 @@
 	}
 
 	function Function_isFunction(value) {
-		return (typeof value === 'function');
+		return typeof value === 'function';
 	}
 
 	function Function_cast(value) {
@@ -263,24 +263,15 @@
 		windowEventListeners: windowEventListeners,
 	};
 
-	function Function_withSelf(func) {
-		var callSelf = function() {
-			var args = [], len = arguments.length;
-			while ( len-- ) args[ len ] = arguments[ len ];
-
-			return func.call.apply(func, [ this, callSelf ].concat( args ));
-		};
-		return callSelf;
-	}
-
 	function setAnimationLoop(callback, delay) {
-		Function_withSelf(function (callSelf) {
+		var run = (function () {
 			requestAnimationFrame(function () {
 				if (callback() !== false) {
-					setTimeout(callSelf, delay);
+					setTimeout(run, delay);
 				}
 			});
-		})();
+		});
+		run();
 	}
 
 	function mounted() {
@@ -388,7 +379,7 @@
 	}
 
 	function Vue_isVue(value) {
-		return (value && value._isVue);
+		return value && value._isVue;
 	}
 
 	function getRestrictBounds() {

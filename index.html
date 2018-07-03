@@ -6,12 +6,16 @@
 		<title>VueDragDrop</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-		<style>[v-cloak] {display: none;}</style>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
 		<script src="VueDragDrop.js"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.0-rc.1/vuetify.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.1/vuetify.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.1/vuetify.min.js"></script>
 		<script src="https://unpkg.com/@seregpie/vueflex@18.5.11"></script>
 	</head>
 	<body>
@@ -37,11 +41,11 @@
 			</v-content>
 		</v-app>
 		<template id="app-example-i1">
-			<div style="height: 200px; padding: 24px;">
+			<div style="height: 200px;" :style="{padding: (itemSize / 2)+'px'}">
 				<div style="position: relative; width: 100%; height: 100%;" ref="dragArea">
-					<div style="position: absolute; width: 0; height: 0;" :style="{left: (position[0] * 100)+'%', top: (position[1] * 100)+'%'}">
-						<vue-drag-item style="transform: translate(-50%,-50%);" @drag="onDrag">
-							<v-avatar slot-scope="props" style="cursor: pointer;" :size="48" :color="[props.dragged ? 'red' : 'blue', 'lighten-3'].join(' ')">
+					<div v-for="(item, itemIndex) in items" :key="itemIndex" style="position: absolute; width: 0; height: 0;" :style="{left: (item.position[0] * 100)+'%', top: (item.position[1] * 100)+'%'}">
+						<vue-drag-item style="transform: translate(-50%,-50%);" :data="itemIndex" @drag="onDrag">
+							<v-avatar slot-scope="props" :class="{'elevation-6': props.dragged}" style="cursor: pointer;  position: relative;" :style="{zIndex: props.dragged ? 1 : undefined}" :size="itemSize" :color="[props.dragged ? 'red' : 'blue', 'lighten-3'].join(' ')">
 								<span style="font-size: 2em;">{{ props.dragged ? '😠' : '🙂' }}</span>
 							</v-avatar>
 							<div slot="ghost"></div>

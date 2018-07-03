@@ -1,11 +1,10 @@
-import Function_withSelf from './Function/withSelf';
-
 export default function(callback, delay) {
-	Function_withSelf(callSelf => {
+	let run = (() => {
 		requestAnimationFrame(() => {
 			if (callback() !== false) {
-				setTimeout(callSelf, delay);
+				setTimeout(run, delay);
 			}
 		});
-	})();
+	});
+	run();
 }
