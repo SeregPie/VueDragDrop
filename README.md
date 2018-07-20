@@ -39,7 +39,7 @@ import VueDragDrop from '@seregpie/vuedragdrop';
 export default {
   // ...
   components: {
-    [VueDragDrop.DargItem.name]: VueDragDrop.DargItem,
+    [VueDragDrop.DragItem.name]: VueDragDrop.DragItem,
     [VueDragDrop.DropArea.name]: VueDragDrop.DropArea,
   },
 };
@@ -60,7 +60,7 @@ If Vue is detected, the components will be registered automatically.
 
 ## components
 
-### VueDragIten
+### VueDragItem
 
 #### properties
 
