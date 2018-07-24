@@ -3,7 +3,6 @@ export default function() {
 		elementBounds,
 		position,
 	} = this;
-
 	return {
 		left: position.left - elementBounds.left,
 		top: position.top - elementBounds.top,

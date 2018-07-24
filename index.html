@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 		<title>VueDragDrop</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
 		<style>
 			[v-cloak] {
 				display: none;
@@ -14,8 +14,8 @@
 		<script src="VueDragDrop.js"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"/>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.7/vuetify.min.css"/>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.7/vuetify.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.8/vuetify.min.css"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.1.8/vuetify.min.js"></script>
 		<script src="https://unpkg.com/@seregpie/vueflex@18.7.4"></script>
 	</head>
 	<body>
@@ -28,46 +28,75 @@
 				</v-btn>
 			</v-toolbar>
 			<v-content>
-				<v-container>
-					<vue-flex-box direction-column :spacing="32">
-						<vue-flex-item v-for="i in 1">
-							<div style="font-size: 1.5em;">#{{ i }}</div>
-							<div style="border: 1px dashed #9e9e9e; border-radius: 8px; padding: 8px;">
-								<component :is="'my-example-i'+i"></component>
-							</div>
-						</vue-flex-item>
+				<v-container fill-height justify-center>
+					<vue-flex-box style="width: 100%; height: 100%; max-width: 600px; max-height: 400px;" justify-content="space-around" direction-column spacing="32px">
+						<vue-flex-box justify-content="space-around">
+							<vue-flex-item>
+								<vue-drag-item data="🍔">
+									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="red lighten-2">
+										<span style="font-size: 4em;">🍔</span>
+									</v-avatar>
+									<v-avatar slot="ghost" slot-scope="props" class="elevation-6" color="red lighten-4">
+										<span style="font-size: 2em;">🍔</span>
+									</v-avatar>
+								</vue-drag-item>
+							</vue-flex-item>
+							<vue-flex-item>
+								<vue-drag-item data="🍕">
+									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="red lighten-2">
+										<span style="font-size: 4em;">🍕</span>
+									</v-avatar>
+									<v-avatar slot="ghost" slot-scope="props" class="elevation-6" color="red lighten-4">
+										<span style="font-size: 2em;">🍕</span>
+									</v-avatar>
+								</vue-drag-item>
+							</vue-flex-item>
+						</vue-flex-box>
+						<vue-flex-box justify-content="space-around">
+							<vue-flex-item>
+								<vue-drop-area :accept="acceptHamburger" @drop="hamburgerLover++">
+									<v-badge slot-scope="props" overlap color="red">
+										<span slot="badge">{{ hamburgerLover }}</span>
+										<v-tooltip v-model="tooltip" top>
+											<v-avatar slot="activator" :size="96" tile :color="[props.dragged ? (props.dragged.inside ? 'purple' : 'yellow') : 'grey', 'lighten-2'].join(' ')">
+												<span style="font-size: 4em;">{{ props.dragged ? (props.dragged.inside ? '😁' : '🤤') : '🙂' }}</span>
+											</v-avatar>
+											<span>🍔</span>
+										</v-tooltip>
+									</v-badge>
+								</vue-drop-area>
+							</vue-flex-item>
+							<vue-flex-item>
+								<vue-drop-area @drop="allLover++">
+									<v-badge slot-scope="props" overlap color="red">
+										<span slot="badge">{{ allLover }}</span>
+										<v-tooltip v-model="tooltip" top>
+											<v-avatar slot="activator" :size="96" tile :color="[props.dragged ? (props.dragged.inside ? 'purple' : 'yellow') : 'grey', 'lighten-2'].join(' ')">
+												<span style="font-size: 4em;">{{ props.dragged ? (props.dragged.inside ? '😁' : '🤤') : '🙂' }}</span>
+											</v-avatar>
+											<span>🍔 🍕</span>
+										</v-tooltip>
+									</v-badge>
+								</vue-drop-area>
+							</vue-flex-item>
+							<vue-flex-item>
+								<vue-drop-area :accept="acceptPizza" @drop="pizzaLover++">
+									<v-badge slot-scope="props" overlap color="red">
+										<span slot="badge">{{ pizzaLover }}</span>
+										<v-tooltip v-model="tooltip" top>
+											<v-avatar slot="activator" :size="96" tile :color="[props.dragged ? (props.dragged.inside ? 'purple' : 'yellow') : 'grey', 'lighten-2'].join(' ')">
+												<span style="font-size: 4em;">{{ props.dragged ? (props.dragged.inside ? '😁' : '🤤') : '🙂' }}</span>
+											</v-avatar>
+											<span>🍕</span>
+										</v-tooltip>
+									</v-badge>
+								</vue-drop-area>
+							</vue-flex-item>
+						</vue-flex-box>
 					</vue-flex-box>
 				</v-container>
 			</v-content>
 		</v-app>
-		<template id="app-example-i1">
-			<div style="height: 200px;" :style="{padding: (itemSize / 2)+'px'}">
-				<div style="position: relative; width: 100%; height: 100%;" ref="dragArea">
-					<div v-for="(item, itemIndex) in items" :key="itemIndex" style="position: absolute; width: 0; height: 0;" :style="{left: (item.position[0] * 100)+'%', top: (item.position[1] * 100)+'%'}">
-						<vue-drag-item style="transform: translate(-50%,-50%);" :data="itemIndex" @drag="onDrag">
-							<v-avatar slot-scope="props" :class="{'elevation-6': props.dragged}" style="cursor: pointer;  position: relative;" :style="{zIndex: props.dragged ? 1 : undefined}" :size="itemSize" :color="[props.dragged ? 'red' : 'blue', 'lighten-3'].join(' ')">
-								<span style="font-size: 2em;">{{ props.dragged ? '😠' : '🙂' }}</span>
-							</v-avatar>
-							<div slot="ghost"></div>
-						</vue-drag-item>
-					</div>
-				</div>
-			</div>
-		</template>
-		<template id="app-example-i2">
-			<div style="height: 300px;">
-				<vue-drag-item :revert-duration="1000" :restrict="this">
-					<v-avatar slot-scope="props" style="cursor: pointer;" color="pink">
-						<span style="font-size: 2em;">🍌</span>
-					</v-avatar>
-				</vue-drag-item>
-				<vue-drag-item :revert-duration="1000" :restrict="this">
-					<v-avatar slot-scope="props" style="cursor: pointer;" color="pink">
-						<span style="font-size: 2em;">🍎</span>
-					</v-avatar>
-				</vue-drag-item>
-			</div>
-		</template>
 		<script src="demo/index.js"></script>
 	</body>
 </html>

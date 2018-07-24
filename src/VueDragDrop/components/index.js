@@ -1,2 +1,2 @@
 export {default as DragItem} from './DragItem';
-//export {default as DropArea} from './DropArea';
+export {default as DropArea} from './DropArea';

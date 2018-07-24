@@ -6,7 +6,6 @@ export default function() {
 		pointerPosition,
 		restrictBounds,
 	} = this;
-
 	return {
 		left: Math_clamp(
 			pointerPosition.left,

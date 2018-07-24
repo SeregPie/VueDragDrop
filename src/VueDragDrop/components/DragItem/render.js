@@ -1,46 +1,25 @@
-import Function_identity from '/utils/Function/identity';
 import Object_mapValues from '/utils/Object/mapValues';
+import Function_noop from '/utils/Function/noop';
 
 export default function (createElement) {
 	let {
 		$scopedSlots,
 		dragged,
-		relativePosition,
-		revertDuration,
+		pointerPosition,
 		tag,
 	} = this;
-
 	$scopedSlots = {
-		default: Function_identity,
+		default: Function_noop,
+		ghost: Function_noop,
 		...$scopedSlots,
 	};
-
 	let defaultSlotElement = $scopedSlots.default({dragged});
-	let ghostElementStyle = {
-		position: 'relative',
-	};
-	/*if (dragged) {
-		ghostElementStyle.transform = `translate(${relativePosition.left}px,${relativePosition.top}px)`;
-	} else
-	if (revertDuration > 0) {
-		ghostElementStyle.transition = [
-			'transform',
-			`${revertDuration}ms`
-		];
-	}*/
-	let ghostElement = createElement(
-		tag,
-		{
-			style: ghostElementStyle,
-			ref: 'ghost',
-		},
-		[defaultSlotElement],
-	);
-	let mainElement = createElement(
-		tag,
+	let ghostSlotElement = $scopedSlots.ghost({dragged});
+	let defaultElement = createElement(
+		'div',
 		{
 			style: {
-				display: 'inline-block',
+				position: 'relative',
 			},
 			on: Object_mapValues({
 				touchstart: this.onTouchStart,
@@ -49,7 +28,32 @@ export default function (createElement) {
 				mousedown: this.onMouseDown,
 			}, f => f.bind(this)),
 		},
-		[ghostElement],
+		[defaultSlotElement],
+	);
+	let ghostElement = createElement(
+		tag,
+		{
+			style: {
+				position: 'absolute',
+				zIndex: 999999,
+				left: `${pointerPosition.left}px`,
+				top: `${pointerPosition.top}px`,
+			},
+			ref: 'ghost',
+		},
+		[ghostSlotElement],
+	);
+	let mainElement = createElement(
+		tag,
+		{
+			style: {
+				display: 'inline-block',
+			},
+		},
+		[
+			defaultElement,
+			ghostElement,
+		],
 	);
 	return mainElement;
 }

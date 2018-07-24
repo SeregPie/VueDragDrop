@@ -71,6 +71,14 @@ If Vue is detected, the components will be registered automatically.
 | `restrict` | | |
 | `data` | | |
 
+#### events
+
+| event | description |
+| ---: | :--- | :--- |
+| `drag-start` | |
+| `drag` | |
+| `drag-end` | |
+
 ### VueDropArea
 
 #### properties
