@@ -1,14 +1,17 @@
 import startAnimationLoop from '/utils/startAnimationLoop';
 
 export default function() {
-	Object.entries(this.windowEventListeners).forEach(([eventName, eventListener]) => {
-		window.addEventListener(eventName, eventListener);
+	let {windowEventListeners} = this;
+	Object.entries(windowEventListeners).forEach(([name, listener]) => {
+		window.addEventListener(name, listener);
 	});
 	startAnimationLoop(() => {
 		if (this._isDestroyed) {
 			return false;
 		}
-	}, 1000);
+		this.updateGhostSize();
+		this.updateRestrictBounds();
+	}, 1000/60);
 	let {$refs} = this;
 	if ($refs.ghost) {
 		document.body.appendChild($refs.ghost);

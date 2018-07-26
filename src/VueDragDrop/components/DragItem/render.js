@@ -3,8 +3,7 @@ import Function_noop from '/utils/Function/noop';
 export default function (createElement) {
 	let {
 		$scopedSlots,
-		dragged,
-		pointerPosition,
+		active,
 		tag,
 	} = this;
 	$scopedSlots = {
@@ -12,11 +11,26 @@ export default function (createElement) {
 		ghost: Function_noop,
 		...$scopedSlots,
 	};
-	let defaultSlotElement = $scopedSlots.default({dragged});
+	let props = {};
+	let ghostElementStyle = {
+		position: 'absolute',
+		zIndex: 999999,
+	};
 	let ghostSlotElement;
-	if (dragged) {
-		ghostSlotElement = $scopedSlots.ghost({dragged});
+	if (active) {
+		let {ghostPosition} = this;
+		Object.assign(props, {
+			dragged: {
+				position: ghostPosition,
+			},
+		});
+		Object.assign(ghostElementStyle, {
+			left: `${ghostPosition.left}px`,
+			top: `${ghostPosition.top}px`,
+		});
+		ghostSlotElement = $scopedSlots.ghost(props);
 	}
+	let defaultSlotElement = $scopedSlots.default(props);
 	let defaultElement = createElement(
 		'div',
 		{
@@ -33,14 +47,9 @@ export default function (createElement) {
 		[defaultSlotElement],
 	);
 	let ghostElement = createElement(
-		tag,
+		'div',
 		{
-			style: {
-				position: 'absolute',
-				zIndex: 999999,
-				left: `${pointerPosition.left}px`,
-				top: `${pointerPosition.top}px`,
-			},
+			style: ghostElementStyle,
 			ref: 'ghost',
 		},
 		[ghostSlotElement],

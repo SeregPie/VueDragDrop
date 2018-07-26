@@ -32,7 +32,7 @@
 					<vue-flex-box style="width: 100%; height: 100%; max-width: 600px; max-height: 400px;" justify-content="space-around" direction-column spacing="32px">
 						<vue-flex-box justify-content="space-around">
 							<vue-flex-item>
-								<vue-drag-item data="🍔">
+								<vue-drag-item :restrict="this" data="🍔">
 									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="pink lighten-2">
 										<span style="font-size: 4em;">🍔</span>
 									</v-avatar>
@@ -42,7 +42,7 @@
 								</vue-drag-item>
 							</vue-flex-item>
 							<vue-flex-item>
-								<vue-drag-item data="🍕">
+								<vue-drag-item :restrict="this" data="🍕">
 									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="pink lighten-2">
 										<span style="font-size: 4em;">🍕</span>
 									</v-avatar>

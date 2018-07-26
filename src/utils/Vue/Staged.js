@@ -1,21 +1,29 @@
+import Array_last from '../Array/last';
 import Function_cast from '../Function/cast';
+import Number_isNumber from '../Number/isNumber';
 
 let prefix = 'staged_';
 
 export default function(staged) {
-	let data = {};
 	let computed = {};
-	Object.entries(staged).forEach(([key, initialMethod]) => {
-		let next = function(...args) {
-			this[prefix+key] = args.length ? Function_cast(args[0]) : initialMethod;
+	Object.entries(staged).forEach(([key, method]) => {
+		let next = function(n = 0) {
+			if (Number_isNumber(n)) {
+				this[prefix+key].splice(n);
+			} else {
+				this[prefix+key].push(Function_cast(n));
+			}
 		};
-		data[prefix+key] = initialMethod;
 		computed[key] = function() {
-			return this[prefix+key].call(this, next.bind(this));
+			return Array_last([method, ...this[prefix+key]]).call(this, next.bind(this));
 		};
 	});
 	return {
 		data() {
+			let data = {};
+			Object.keys(staged).forEach(key => {
+				data[prefix+key] = [];
+			});
 			return data;
 		},
 		computed,

@@ -1,5 +1,6 @@
 export default function() {
-	Object.entries(this.windowEventListeners).forEach(([eventName, eventListener]) => {
-		window.removeEventListener(eventName, eventListener);
+	let {windowEventListeners} = this;
+	Object.entries(windowEventListeners).forEach(([name, listener]) => {
+		window.removeEventListener(name, listener);
 	});
 }
