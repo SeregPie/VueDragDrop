@@ -2,12 +2,12 @@ import Lang_clone from '/utils/Lang/clone';
 
 export default function() {
 	let {
-		position,
 		data,
+		position,
 	} = this;
 	position = Lang_clone(position);
-	this.$emit('drag-end', {
-		position,
+	this.$emit('drag', {
 		data,
+		position,
 	});
 }

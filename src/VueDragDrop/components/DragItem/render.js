@@ -1,4 +1,3 @@
-import Object_mapValues from '/utils/Object/mapValues';
 import Function_noop from '/utils/Function/noop';
 
 export default function (createElement) {
@@ -14,19 +13,22 @@ export default function (createElement) {
 		...$scopedSlots,
 	};
 	let defaultSlotElement = $scopedSlots.default({dragged});
-	let ghostSlotElement = $scopedSlots.ghost({dragged});
+	let ghostSlotElement;
+	if (dragged) {
+		ghostSlotElement = $scopedSlots.ghost({dragged});
+	}
 	let defaultElement = createElement(
 		'div',
 		{
 			style: {
 				position: 'relative',
 			},
-			on: Object_mapValues({
+			on: {
 				touchstart: this.onTouchStart,
 				touchmove: this.onTouchMove,
 				touchend: this.onTouchEnd,
 				mousedown: this.onMouseDown,
-			}, f => f.bind(this)),
+			},
 		},
 		[defaultSlotElement],
 	);

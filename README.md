@@ -67,17 +67,17 @@ If Vue is detected, the components will be registered automatically.
 | property | type | default |
 | ---: | :--- | :--- |
 | `tag` | `String` | `'div'` |
+| `data` | | |
 | `revertDuration` | `Number` | `0` |
 | `restrict` | | |
-| `data` | | |
 
 #### events
 
 | event | description |
-| ---: | :--- | :--- |
+| ---: | :--- |
 | `drag-start` | |
-| `drag` | |
 | `drag-end` | |
+| `drag` | |
 
 ### VueDropArea
 
@@ -85,4 +85,20 @@ If Vue is detected, the components will be registered automatically.
 
 | property | type | default |
 | ---: | :--- | :--- |
+| `data` | | |
 | `tag` | `String` | `'div'` |
+| `accept` | `Function` | `stubTrue` |
+| `overlapThreshold` | `Number` | `1` |
+
+#### events
+
+| event | description |
+| ---: | :--- |
+| `drag-start` | |
+| `drag-end` | |
+| `drag-over` | |
+| `drag-out` | |
+| `drag` | |
+| `drag-outside` | |
+| `drag-inside` | |
+| `drop` | |

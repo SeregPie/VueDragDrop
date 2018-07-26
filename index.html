@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 		<title>VueDragDrop</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
 		<style>
 			[v-cloak] {
 				display: none;
@@ -33,20 +33,20 @@
 						<vue-flex-box justify-content="space-around">
 							<vue-flex-item>
 								<vue-drag-item data="🍔">
-									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="red lighten-2">
+									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="pink lighten-2">
 										<span style="font-size: 4em;">🍔</span>
 									</v-avatar>
-									<v-avatar slot="ghost" slot-scope="props" class="elevation-6" color="red lighten-4">
+									<v-avatar slot="ghost" slot-scope="props" class="elevation-6" style="cursor: pointer;" color="pink lighten-4">
 										<span style="font-size: 2em;">🍔</span>
 									</v-avatar>
 								</vue-drag-item>
 							</vue-flex-item>
 							<vue-flex-item>
 								<vue-drag-item data="🍕">
-									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="red lighten-2">
+									<v-avatar slot-scope="props" style="cursor: pointer;" :size="96" color="pink lighten-2">
 										<span style="font-size: 4em;">🍕</span>
 									</v-avatar>
-									<v-avatar slot="ghost" slot-scope="props" class="elevation-6" color="red lighten-4">
+									<v-avatar slot="ghost" slot-scope="props" class="elevation-6" style="cursor: pointer;" color="pink lighten-4">
 										<span style="font-size: 2em;">🍕</span>
 									</v-avatar>
 								</vue-drag-item>
@@ -55,7 +55,7 @@
 						<vue-flex-box justify-content="space-around">
 							<vue-flex-item>
 								<vue-drop-area :accept="acceptHamburger" @drop="hamburgerLover++">
-									<v-badge slot-scope="props" overlap color="red">
+									<v-badge slot-scope="props" overlap color="pink">
 										<span slot="badge">{{ hamburgerLover }}</span>
 										<v-tooltip v-model="tooltip" top>
 											<v-avatar slot="activator" :size="96" tile :color="[props.dragged ? (props.dragged.inside ? 'purple' : 'yellow') : 'grey', 'lighten-2'].join(' ')">
@@ -68,7 +68,7 @@
 							</vue-flex-item>
 							<vue-flex-item>
 								<vue-drop-area @drop="allLover++">
-									<v-badge slot-scope="props" overlap color="red">
+									<v-badge slot-scope="props" overlap color="pink">
 										<span slot="badge">{{ allLover }}</span>
 										<v-tooltip v-model="tooltip" top>
 											<v-avatar slot="activator" :size="96" tile :color="[props.dragged ? (props.dragged.inside ? 'purple' : 'yellow') : 'grey', 'lighten-2'].join(' ')">
@@ -81,7 +81,7 @@
 							</vue-flex-item>
 							<vue-flex-item>
 								<vue-drop-area :accept="acceptPizza" @drop="pizzaLover++">
-									<v-badge slot-scope="props" overlap color="red">
+									<v-badge slot-scope="props" overlap color="pink">
 										<span slot="badge">{{ pizzaLover }}</span>
 										<v-tooltip v-model="tooltip" top>
 											<v-avatar slot="activator" :size="96" tile :color="[props.dragged ? (props.dragged.inside ? 'purple' : 'yellow') : 'grey', 'lighten-2'].join(' ')">

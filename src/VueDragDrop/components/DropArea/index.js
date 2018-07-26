@@ -8,3 +8,9 @@ export default {
 	mounted,
 	render,
 };
+
+/*
+dragged
+accepted
+draggedInside
+*/
