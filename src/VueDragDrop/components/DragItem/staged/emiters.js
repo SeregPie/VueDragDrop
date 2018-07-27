@@ -5,10 +5,6 @@ export default function(next) {
 			data,
 			ghostPosition,
 		} = this;
-		this.$emit('drag-start', {
-			data,
-			position: ghostPosition,
-		});
 		next(function() {
 			let {
 				active,
@@ -16,17 +12,20 @@ export default function(next) {
 				ghostPosition,
 			} = this;
 			if (active) {
-				this.$emit('drag', {
+				return [['drag', {
 					data,
-					position: ghostPosition,
-				});
-			} else {
-				this.$emit('drag-end', {
-					data,
-					position: ghostPosition,
-				});
-				next();
+					position: {...ghostPosition},
+				}]];
 			}
+			next();
+			return [['drag-end', {
+				data,
+				position: {...ghostPosition},
+			}]];
 		});
+		return [['drag-start', {
+			data,
+			position: {...ghostPosition},
+		}]];
 	}
 }

@@ -1,5 +1,5 @@
-import emmiters from './emmiters';
+import emiters from './emiters';
 
 export default {
-	emmiters,
+	emiters,
 };

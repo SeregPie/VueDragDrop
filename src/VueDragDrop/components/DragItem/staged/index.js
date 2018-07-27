@@ -1,7 +1,7 @@
 import activeEventListeners from './activeEventListeners';
-import emmiters from './emmiters';
+import emiters from './emiters';
 
 export default {
 	activeEventListeners,
-	emmiters,
+	emiters,
 };

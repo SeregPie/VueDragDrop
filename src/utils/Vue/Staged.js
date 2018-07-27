@@ -6,16 +6,18 @@ let prefix = 'staged_';
 
 export default function(staged) {
 	let computed = {};
-	Object.entries(staged).forEach(([key, method]) => {
-		let next = function(n = 0) {
-			if (Number_isNumber(n)) {
-				this[prefix+key].splice(n);
-			} else {
-				this[prefix+key].push(Function_cast(n));
-			}
+	Object.entries(staged).forEach(([key, initialStage]) => {
+		let next = function(stage = 0) {
+			this.$nextTick(() => {
+				if (Number_isNumber(stage)) {
+					this[prefix+key].splice(stage);
+				} else {
+					this[prefix+key].push(Function_cast(stage));
+				}
+			});
 		};
 		computed[key] = function() {
-			return Array_last([method, ...this[prefix+key]]).call(this, next.bind(this));
+			return Array_last([initialStage, ...this[prefix+key]]).call(this, next.bind(this));
 		};
 	});
 	return {
