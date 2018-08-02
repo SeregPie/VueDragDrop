@@ -3,7 +3,7 @@ import Function_noop from '/utils/Function/noop';
 export default function (createElement) {
 	let {
 		$scopedSlots,
-		active,
+		dragged,
 		tag,
 	} = this;
 	$scopedSlots = {
@@ -17,7 +17,7 @@ export default function (createElement) {
 		zIndex: 999999,
 	};
 	let ghostSlotElement;
-	if (active) {
+	if (dragged) {
 		let {ghostPosition} = this;
 		Object.assign(props, {
 			dragged: {

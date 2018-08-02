@@ -3,7 +3,7 @@ import defaultRestrictBounds from './constants/defaultRestrictBounds';
 
 export default function() {
 	return {
-		active: false,
+		dragged: false,
 		ghostSize: {...defaultGhostSize},
 		pointerPosition: {left: 0, top: 0},
 		restrictBounds: {...defaultRestrictBounds},

@@ -1,23 +1,23 @@
-export default function(next) {
-	let {active} = this;
-	if (active) {
+export default function(set, reset) {
+	let {dragged} = this;
+	if (dragged) {
 		let {
 			data,
 			ghostPosition,
 		} = this;
-		next(function() {
+		set(function() {
 			let {
-				active,
 				data,
+				dragged,
 				ghostPosition,
 			} = this;
-			if (active) {
+			if (dragged) {
 				return [['drag', {
 					data,
 					position: {...ghostPosition},
 				}]];
 			}
-			next();
+			reset();
 			return [['drag-end', {
 				data,
 				position: {...ghostPosition},

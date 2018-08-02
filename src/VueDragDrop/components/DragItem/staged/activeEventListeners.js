@@ -1,4 +1,4 @@
-export default function(next) {
+export default function(set, reset) {
 	return {
 		onTouchStart(event) {
 			if (event.touches.length === 1) {
@@ -7,16 +7,16 @@ export default function(next) {
 					left: event.touches[0].clientX,
 					top: event.touches[0].clientY,
 				});
-				next({
+				set({
 					onTouchMove(event) {
 						if (event.touches.length === 1) {
 							event.preventDefault();
-							this.active = true;
+							this.dragged = true;
 							Object.assign(this.pointerPosition, {
 								left: event.touches[0].clientX,
 								top: event.touches[0].clientY,
 							});
-							next({
+							set({
 								onTouchMove(event) {
 									if (event.touches.length === 1) {
 										event.preventDefault();
@@ -30,11 +30,11 @@ export default function(next) {
 									if (event.changedTouches.length === 1) {
 										event.preventDefault();
 										Object.assign(this.pointerPosition, {
-											left: event.touches[0].clientX,
-											top: event.touches[0].clientY,
+											left: event.changedTouches[0].clientX,
+											top: event.changedTouches[0].clientY,
 										});
-										this.active = false;
-										next();
+										this.dragged = false;
+										reset();
 									}
 								},
 							});
@@ -43,7 +43,7 @@ export default function(next) {
 					onTouchEnd(event) {
 						if (event.changedTouches.length === 1) {
 							event.preventDefault();
-							next();
+							reset();
 						}
 					},
 				});
@@ -56,15 +56,15 @@ export default function(next) {
 					left: event.clientX,
 					top: event.clientY,
 				});
-				next({
+				set({
 					onMouseMove(event) {
 						event.preventDefault();
-						this.active = true;
+						this.dragged = true;
 						Object.assign(this.pointerPosition, {
 							left: event.clientX,
 							top: event.clientY,
 						});
-						next({
+						set({
 							onMouseMove(event) {
 								event.preventDefault();
 								Object.assign(this.pointerPosition, {
@@ -79,8 +79,8 @@ export default function(next) {
 										left: event.clientX,
 										top: event.clientY,
 									});
-									this.active = false;
-									next();
+									this.dragged = false;
+									reset();
 								}
 							},
 						});
@@ -88,7 +88,7 @@ export default function(next) {
 					onMouseUp(event) {
 						if (event.which === 1) {
 							event.preventDefault();
-							next();
+							reset();
 						}
 					},
 				});
