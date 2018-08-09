@@ -1,7 +1,7 @@
 {
 	"name": "@seregpie/vuedragdrop",
 	"version": "18.8.2",
-	"description": "...",
+	"description": "A drag and drop solution for Vue.",
 	"main": "VueDragDrop.js",
 	"scripts": {
 		"build": "rollup -c",

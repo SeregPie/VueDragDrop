@@ -10,6 +10,4 @@ export default {
 		type: Function,
 		default: Function_stubTrue,
 	},
-
-	data: {},
 };

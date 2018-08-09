@@ -1,6 +1,6 @@
 # VueDragDrop
 
-...
+A drag and drop solution for Vue.
 
 ## demo
 
@@ -85,7 +85,6 @@ If Vue is detected, the components will be registered automatically.
 
 | property | type | default |
 | ---: | :--- | :--- |
-| `data` | | |
 | `tag` | `String` | `'div'` |
 | `accept` | `Function` | `stubTrue` |
 | `overlapThreshold` | `Number` | `1` |
