@@ -58,7 +58,7 @@ export default function (createElement) {
 		tag,
 		{
 			style: {
-				display: 'inline-block',
+				display: 'inline',
 			},
 		},
 		[
