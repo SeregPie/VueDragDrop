@@ -1,3 +1,5 @@
+This project is not finished. Do not use it.
+
 # VueDragDrop
 
 A drag and drop solution for Vue.
